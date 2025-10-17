@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     private bool goRight;
     private bool goUp;
     private bool goDown;
+    private int dottens;
     private Rigidbody rb;
     Vector3 WarpPointA = new Vector3(25, 1, 0);
     Vector3 WarpPointB = new Vector3(-25, 1, 0);
@@ -13,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        dottens = 0;
     }
 
     // Update is called once per frame
@@ -63,6 +65,10 @@ public class PlayerMove : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(5, 0, 0);
         }
+        if(dottens == 228)
+        {
+            SceneManager.LoadScene(3);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -77,6 +83,11 @@ public class PlayerMove : MonoBehaviour
         if(collision.gameObject.tag == "dotten")
         {
             Destroy(collision.gameObject);
+            dottens++;
+        }
+        if(collision.gameObject.tag == "Spook")
+        {
+            SceneManager.LoadScene(2);
         }
     }
 }

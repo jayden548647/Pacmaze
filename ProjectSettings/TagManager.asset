@@ -8,6 +8,7 @@ TagManager:
   - warp1
   - warp2
   - dotten
+  - Spook
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,8 @@ public class PlayerMove : MonoBehaviour
     private bool goDown;
     private int dottens;
     private Rigidbody rb;
+    public TMP_Text scoreCount;
+    private int score;
     Vector3 WarpPointA = new Vector3(25, 1, 0);
     Vector3 WarpPointB = new Vector3(-25, 1, 0);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,11 +19,13 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         dottens = 0;
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        ScoreCount();
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             goUp = true;
@@ -84,10 +89,16 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             dottens++;
+           
         }
         if(collision.gameObject.tag == "Spook")
         {
             SceneManager.LoadScene(2);
         }
+    }
+    private void ScoreCount()
+    {
+        score = 10000 * dottens;
+        scoreCount.text = "SCORE: " + score;
     }
 }
